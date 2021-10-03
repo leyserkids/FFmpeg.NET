@@ -3,7 +3,6 @@
     public interface IArgument
     {
         string Argument { get; }
-        string Name => Argument;
     }
 
     public interface IInputArgument : IArgument, IHasMetaData

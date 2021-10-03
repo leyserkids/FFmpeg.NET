@@ -29,6 +29,6 @@ namespace FFmpeg.NET.Events
         public MediaInfo MediaInfo{ get; }
 
         public override string ToString()
-            => $"[{Input?.Name} => {Output?.Name}]\nFrame: {Frame}\nFps: {Fps}\nSize: {SizeKb}kb\nProcessedDuration: {ProcessedDuration}\nBitrate: {Bitrate}\nTotalDuration: {TotalDuration}";
+            => $"[{Input?.Argument} => {Output?.Argument}]\nFrame: {Frame}\nFps: {Fps}\nSize: {SizeKb}kb\nProcessedDuration: {ProcessedDuration}\nBitrate: {Bitrate}\nTotalDuration: {TotalDuration}";
     }
 }

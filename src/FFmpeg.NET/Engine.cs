@@ -11,6 +11,9 @@ namespace FFmpeg.NET
 {
     public sealed class Engine
     {
+        // https://docs.microsoft.com/en-us/dotnet/api/system.io.stream.copytoasync?view=net-5.0#:~:text=The%20size%2C%20in%20bytes%2C%20of,The%20default%20size%20is%2081920.
+        private static readonly int defaultBufferSize = 81920;
+
         private readonly string _ffmpegPath;
         private readonly string _pipePrefix = "xffmpegnet_";
 
@@ -101,7 +104,7 @@ namespace FFmpeg.NET
 
             await pipe.WaitForConnectionAsync(cancellationToken);
             await Task.WhenAll(
-                pipe.CopyToAsync(output, cancellationToken),
+                pipe.CopyToAsync(output, defaultBufferSize, cancellationToken),
                 process.ExecuteAsync(cancellationToken).ContinueWith(x =>
                 {
                     pipe.Disconnect();
@@ -124,7 +127,7 @@ namespace FFmpeg.NET
             await Task.WhenAll(
                 pipe.WaitForConnectionAsync(cancellationToken).ContinueWith(async x =>
                 {
-                    await pipe.CopyToAsync(output, cancellationToken);
+                    await pipe.CopyToAsync(output, defaultBufferSize, cancellationToken);
                 }),
                 process.ExecuteAsync(cancellationToken).ContinueWith(x =>
                 {
