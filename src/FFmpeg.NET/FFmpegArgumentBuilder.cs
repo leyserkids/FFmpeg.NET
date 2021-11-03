@@ -45,6 +45,12 @@ namespace FFmpeg.NET
                 commandBuilder = AppendVideoCropping(commandBuilder, conversionOptions);
             }
 
+            // Extra arguments
+            if (conversionOptions?.ExtraArguments != null)
+            {
+                commandBuilder.AppendFormat(" {0} ", conversionOptions.ExtraArguments);
+            }
+
             return commandBuilder.AppendFormat(" {0} ", output.Argument).ToString();
         }
 
